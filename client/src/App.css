@@ -1,0 +1,81 @@
+html {
+  background: #f8f9f9
+}
+
+html, body, #root, .App, .App>div {
+  height: 100vh
+}
+
+.App {
+  text-align: center;
+}
+
+.main {
+  display: flex;
+  height: 100%
+}
+
+.container {
+  margin-top: 0;
+  padding: 15px;
+  background: #fff;
+  box-shadow: 0px 2px 4px #999
+}
+
+.hashtag {
+  background: #e5f1f8;
+  color: #3c7cb3;
+  border-radius: 30px;
+  margin: 10px;
+  margin-left: 0;
+  display: flex;
+  align-items: center;
+  padding: 15px
+}
+
+/* Material UI */
+
+.MuiInput-underline:before {
+  border-bottom: none !important;
+}
+
+.App-header {
+  background-color: #282c34;
+  min-height: 100vh;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  font-size: calc(10px + 2vmin);
+  color: white;
+}
+
+.App-link {
+  color: #61dafb;
+}
+
+.mobile-visible {
+  display: none
+}
+
+/* Responsiveness */
+
+@media (max-width: 767px) {
+  .mobile-hidden {
+    display: none
+  }
+
+  .mobile-visible {
+    display: initial
+  }
+
+  .main {
+    height: initial;
+    min-height: 100%;
+    flex-direction: column-reverse
+  }
+  .container {
+    margin-left: 0 !important;
+    margin-right: 0 !important
+  }
+}

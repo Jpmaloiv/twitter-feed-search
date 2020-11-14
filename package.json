@@ -1,0 +1,21 @@
+{
+  "name": "twitter-feed-search",
+  "version": "1.0.0",
+  "description": "Twitter Feed Search",
+  "main": "app.js",
+  "scripts": {
+    "test": "mocha tests/test.js",
+    "start": "node app.js"
+  },
+  "author": "James Maloney",
+  "license": "ISC",
+  "dependencies": {
+    "axios": "^0.21.0",
+    "dotenv": "^8.2.0",
+    "express": "^4.17.1",
+    "fetch": "^1.1.0",
+    "http-proxy-middleware": "^1.0.6",
+    "request": "^2.88.2",
+    "socket.io": "^3.0.0"
+  }
+}
