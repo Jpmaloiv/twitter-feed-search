@@ -5,7 +5,6 @@ import { baseUrl } from './constants/baseUrl'
 import axios from 'axios'
 import { FaSearch } from 'react-icons/fa';
 import { Input } from '@material-ui/core';
-import twitter from 'twitter-text'
 
 
 function App() {
@@ -31,7 +30,7 @@ function App() {
 
     setHashtags(hashtags)
 
-  }, [tweets, filteredTweets, pagination])
+  }, [tweets, pagination])
 
   function fetchTweets(e) {
     // Resets to default number of tweets displayed
@@ -69,27 +68,34 @@ function App() {
     setFilteredTweets(arr)
   }
 
-  // Formats tweet to isolate links
-  function parseTweet(tweet) {
-    let urls = []
-
+  // Formats tweet text
+  function parseTweetText(tweet) {
     let text = tweet.full_text
 
-    let links = []
-    if (tweet.entities.media) links = tweet.entities.media
+    const { urls } = tweet.entities
 
-    if (links.length > 0) {
-      for (let i = 0; i < links.length; i++) {
-        urls.push(links[i].url)
-        text.replace(links[i].url, '')
-      }
-
+    if (urls.length > 0) {
       for (let i = 0; i < urls.length; i++) {
-        text += urls[i] + ' '
+        text.replace(urls[i].url, '')
       }
     }
 
     return text
+  }
+
+  // Formats tweet links
+  function parseTweetLinks(tweet) {
+    let links = ''
+
+    const { urls } = tweet.entities
+
+    if (urls.length > 0) {
+      for (let i = 0; i < urls.length; i++) {
+        links += urls[i].url + ' '
+      }
+    }
+
+    return links;
   }
 
   return (
@@ -124,8 +130,10 @@ function App() {
                           <img src={tweet.user.profile_image_url} alt='profile' style={{ alignSelf: 'center', width: 50, marginRight: 20, borderRadius: '50%' }} />
                           <div style={{ textAlign: 'left' }}>
                             <p style={{ fontWeight: 'bold' }}>@{tweet.user.screen_name}</p>
-                            {parseTweet(tweet)}
-                            {/* <span style={{ color: 'purple' }}>{tweet.entities.media && parseTweet(tweet).urls}</span> */}
+                            <p style={{fontSize: 15, lineHeight: '1.4em'}}>
+                              {parseTweetText(tweet)}
+                              <span style={{ color: '#3c7cb3' }}> {parseTweetLinks(tweet)}</span>
+                            </p>
                             <div style={{ display: 'flex', flexWrap: 'wrap' }}>
                               {tweet.entities.hashtags.map((hashtag, i) =>
                                 <div className='hashtag' key={i} >
